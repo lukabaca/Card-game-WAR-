@@ -18,6 +18,15 @@ namespace client
                 return;
             }
 
+            while(true)
+            {
+
+
+
+
+                Console.ReadLine();
+            }
+
             Console.ReadLine();
         }
     }
