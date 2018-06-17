@@ -104,22 +104,41 @@ namespace server
 
             while (true)
             {
-                Move opponentMove = customFormatter.receiveMove(ntwStream);
+                if (game.IsPlaying)
+                {
+                    Move opponentMove = customFormatter.receiveMove(ntwStream);
 
-                String myCard = game.getCardFromTop();
-                String opponentCard = opponentMove.Card;
+                    if(opponentMove.IsGameFinished)
+                    {
+                        Console.WriteLine("You won!");
+                        break;
+                    }
 
-                Console.WriteLine("Battle: " + myCard + " vs " + opponentCard);
+                    String myCard = game.getCardFromTop();
+                    String opponentCard = opponentMove.Card;
 
-                game.cardBattle(myCard, opponentCard);
+                    Console.WriteLine("Battle: " + myCard + " vs " + opponentCard);
 
-                Move myMove = new Move(myCard);
+                    game.cardBattle(myCard, opponentCard);
 
-                customFormatter.sendMove(ntwStream, myMove);
+                    Move myMove = new Move(myCard);
 
-                game.printWonCardsDeck();
+                    customFormatter.sendMove(ntwStream, myMove);
 
-                Console.WriteLine();
+                    game.printWonCardsDeck();
+
+                    Console.WriteLine();
+                }
+                else
+                {
+                    //koniec gry
+                    Console.WriteLine("You lost");
+                    Move finalMove = new Move(true);
+
+                    customFormatter.sendMove(ntwStream, finalMove);
+
+                    break;
+                }
             }
 
 

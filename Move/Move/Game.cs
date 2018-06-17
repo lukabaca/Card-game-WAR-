@@ -38,8 +38,22 @@ namespace gameSpace
 
         public String getCardFromTop()
         {
-            int lastElement = currentDeck.Count - 1;
+            int lastElement = -1;
+
+            if (!isCurrentDeckEmpty())
+            {
+                lastElement = currentDeck.Count - 1;
+                
+            }
+            else if (!iswonCardsDeckyEmpty())
+            {
+                loadDeck(wonCardsDeck);
+
+                lastElement = currentDeck.Count - 1;                
+            }
+
             return currentDeck.ElementAt(lastElement);
+
         }
 
         public String changeCardFormat(String card)
@@ -142,16 +156,21 @@ namespace gameSpace
             {
                 currentDeck.Remove(card);
             }
-            else if(!iswonCardsDeckyEmpty())
+            else 
             {
-
-                loadDeck(wonCardsDeck);
+                if (!iswonCardsDeckyEmpty())
+                {
+                    loadDeck(wonCardsDeck);
+                    resetWonCardsDeckk();
+                }
+                //jesli oba decki sa puste to znaczy ze przegralem
+                else
+                {
+                    isPlaying = false;
+                }
             }
-            //przypadek gry przegrywanm
-            else
-            {
-                isPlaying = false;
-            }
+            
+            
 
         }
 
@@ -163,6 +182,11 @@ namespace gameSpace
                 currentDeck.Add(card);
             }
 
+        }
+
+        public void resetWonCardsDeckk()
+        {
+            wonCardsDeck.Clear();
         }
 
         public void printCurrentDeck()

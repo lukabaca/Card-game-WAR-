@@ -41,21 +41,41 @@ namespace client
 
             while(true)
             {
-                String myCard = game.getCardFromTop();
-                Move move = new Move(myCard);
+                if (game.IsPlaying)
+                {
+                    String myCard = game.getCardFromTop();
+                    Move move = new Move(myCard);
 
-                client.sendMove(move);
+                    client.sendMove(move);
 
-                Move opponentMove = client.receiveMove();
-                String opponentCard = opponentMove.Card;
+                    Move opponentMove = client.receiveMove();
 
-                Console.WriteLine("Battle: " + myCard + " vs " + opponentCard);
+                    if (opponentMove.IsGameFinished)
+                    {
+                        Console.WriteLine("You won!");
+                        break;
+                    }
 
-                game.cardBattle(myCard, opponentCard);
+                    String opponentCard = opponentMove.Card;
 
-                game.printWonCardsDeck();
-                Console.WriteLine("Nacisnij cos by wykonac nastepny ruch");
-                Console.ReadLine();
+                    Console.WriteLine("Battle: " + myCard + " vs " + opponentCard);
+
+                    game.cardBattle(myCard, opponentCard);
+
+                    game.printWonCardsDeck();
+                    Console.WriteLine("Nacisnij cos by wykonac nastepny ruch");
+                    Console.ReadLine();
+                }
+                else
+                {
+                    //koniec gry
+                    Console.WriteLine("You lost");
+                    Move finalMove = new Move(true);
+
+                    client.sendMove(finalMove);
+
+                    break;
+                }
             }
             
             Console.ReadLine();

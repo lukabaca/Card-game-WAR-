@@ -28,6 +28,14 @@ namespace gameSpace
             this.isGameFinished = isGameFinished;
         }
 
+        public Move(Boolean isGameFinished)
+        {
+            this.card = "";
+            this.isWar = false;
+
+            this.isGameFinished = isGameFinished;
+        }
+
         public String Card
         {
             get
