@@ -125,7 +125,7 @@ namespace server
                         game.removeCardFromDeck(myCard);
                         game.addCardsToWarBonus(myCard, opponentCard);
 
-                        myMove = new Move(myCard, true);
+                        myMove = new Move(myCard, true, false);
                     }
                     else
                     {

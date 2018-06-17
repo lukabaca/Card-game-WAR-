@@ -39,12 +39,24 @@ namespace client
             game.printCurrentDeck();
             game.printWonCardsDeck();
 
+
+            //potem zrefaktoruj to
+            Boolean bonus = false;
             while(true)
             {
                 if (game.IsPlaying)
                 {
+                    Move move = null;
                     String myCard = game.getCardFromTop();
-                    Move move = new Move(myCard);
+                    if (bonus)
+                    {
+                        move = new Move(myCard, true, false);
+                        bonus = false;
+                    }
+                    else
+                    {
+                        move = new Move(myCard);
+                    }
 
                     client.sendMove(move);
 
@@ -76,15 +88,17 @@ namespace client
 
                         if (game.IsWar)
                         {
-                            myMove = new Move(myCard, true);
+                            bonus = true;
+                            //myMove = new Move(myCard, true);
                         }
                         else
                         {
-                            myMove = new Move(myCard);
+                            //myMove = new Move(myCard);
                         }
                     }
 
-                    game.printWonCardsDeck();
+                    //game.printWonCardsDeck();
+                    game.printCurrentDeck();
                     Console.WriteLine("Nacisnij cos by wykonac nastepny ruch");
                     Console.ReadLine();
                 }
