@@ -26,13 +26,15 @@ namespace gameSpace
             opponentCardDeck.Clear();
         }
 
-        public void addCardsToDecks(String serverSideCard, String clientSideCard)
+        public void addCardsToDecks(String myCard, String opponentCard)
         {
-            myCardDeck.Add(serverSideCard);
-            opponentCardDeck.Add(clientSideCard);
+
+
+            myCardDeck.Add(myCard);
+            opponentCardDeck.Add(opponentCard);
         }
 
-        public List<string> ServerSideDeck
+        public List<string> MyCardDeck
         {
             get
             {
@@ -45,7 +47,7 @@ namespace gameSpace
             }
         }
 
-        public List<string> ClientSideDeck
+        public List<string> OpponentCardDeck
         {
             get
             {

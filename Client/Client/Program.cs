@@ -49,6 +49,7 @@ namespace client
                     client.sendMove(move);
 
                     Move opponentMove = client.receiveMove();
+                    String opponentCard = opponentMove.Card;
 
                     if (opponentMove.IsGameFinished)
                     {
@@ -56,25 +57,32 @@ namespace client
                         break;
                     }
 
-
-
-                    String opponentCard = opponentMove.Card;
-
-                    Console.WriteLine("Battle: " + myCard + " vs " + opponentCard);
-
-                    game.cardBattle(myCard, opponentCard);
-
                     Move myMove = null;
-                    if (game.IsWar)
+
+                    if (opponentMove.IsWar)
                     {
-                        myMove = new Move(myCard, true);
+                        Console.WriteLine("Do puli wojny: " + myCard + " oraz przeciwnika " + opponentCard);
+                        game.removeCardFromDeck(myCard);
+                        game.addCardsToWarBonus(myCard, opponentCard);
+
+                        myMove = new Move(myCard);
+
                     }
                     else
                     {
-                        myMove = new Move(myCard);
+                        Console.WriteLine("Battle: " + myCard + " vs " + opponentCard);
+
+                        game.cardBattle(myCard, opponentCard);
+
+                        if (game.IsWar)
+                        {
+                            myMove = new Move(myCard, true);
+                        }
+                        else
+                        {
+                            myMove = new Move(myCard);
+                        }
                     }
-
-
 
                     game.printWonCardsDeck();
                     Console.WriteLine("Nacisnij cos by wykonac nastepny ruch");

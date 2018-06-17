@@ -81,6 +81,18 @@ namespace gameSpace
             return cardFormatted;
 
         }
+        private void addCardsToWonCardsDeckFromWar(List<String> myWarCardDeck, List<String> opponentWarCarDeck)
+        {
+            foreach(String card in myWarCardDeck)
+            {
+                wonCardsDeck.Add(card);
+            }
+
+            foreach (String card in opponentWarCarDeck)
+            {
+                wonCardsDeck.Add(card);
+            }
+        }
 
         public void cardBattle(String myCard, String opponentCard)
         {
@@ -98,17 +110,45 @@ namespace gameSpace
                 //dodaje moja karte, ktora pokonalem przeciwnika i karte przeciwnika do 2 listy, "kupki" kart
                 Console.WriteLine(myCard + " > " + opponentCard);
 
-                currentDeck.Remove(myCard);
+                if(isWar)
+                {
+                    currentDeck.Remove(myCard);
 
-                wonCardsDeck.Add(myCard);
-                wonCardsDeck.Add(opponentCard);
+                    war.addCardsToDecks(myCard, opponentCard);
+
+                    //tu musze dodac karty do kupki z puli wojny
+                    addCardsToWonCardsDeckFromWar(war.MyCardDeck, war.OpponentCardDeck);
+
+
+                    war.clearDecks();
+                    isWar = false;
+                }
+                else
+                {
+                    currentDeck.Remove(myCard);
+
+                    wonCardsDeck.Add(myCard);
+                    wonCardsDeck.Add(opponentCard);
+                }
+
+                
             }
 
             if(myCardValue < opponentCardValue)
             {
                 Console.WriteLine(myCard + " < " + opponentCard);
-                //usuwam karte swoja
-                currentDeck.Remove(myCard);
+
+                if(isWar)
+                {
+                    currentDeck.Remove(myCard);
+
+                    war.clearDecks();
+                    isWar = false;
+                }
+                else
+                {
+                    currentDeck.Remove(myCard);
+                }
             }
 
             if(myCardValue == opponentCardValue)
@@ -117,6 +157,7 @@ namespace gameSpace
                 isWar = true;
 
                 currentDeck.Remove(myCard);
+
                 war.addCardsToDecks(myCard, opponentCard);
                
                 //przypadek wojny
