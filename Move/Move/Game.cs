@@ -26,6 +26,7 @@ namespace gameSpace
 
         private Boolean isWar;
 
+        private War war;
         
 
         public Game()
@@ -34,6 +35,8 @@ namespace gameSpace
             wonCardsDeck = new List<String>();
             isPlaying = true;
             isWar = false;
+
+            war = new War();
         }
 
         public String getCardFromTop()
@@ -110,12 +113,23 @@ namespace gameSpace
 
             if(myCardValue == opponentCardValue)
             {
-                isWar = true;
                 Console.WriteLine("JEST WOJNA");
+                isWar = true;
+
+                currentDeck.Remove(myCard);
+                war.addCardsToDecks(myCard, opponentCard);
+               
                 //przypadek wojny
             }
 
 
+        }
+        //dodaje karty do puli wojny, te co sa 'ukryte'
+        public void addCardsToWarBonus(String myCard, String opponentCard)
+        {
+            currentDeck.Remove(myCard);
+
+            war.addCardsToDecks(myCard, opponentCard);
         }
 
 

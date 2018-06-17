@@ -117,11 +117,33 @@ namespace server
                     String myCard = game.getCardFromTop();
                     String opponentCard = opponentMove.Card;
 
-                    Console.WriteLine("Battle: " + myCard + " vs " + opponentCard);
+                    if (opponentMove.IsWar)
+                    {
+                        Console.WriteLine("Do puli wojny: " + myCard + " oraz przeciwnika " + opponentCard);
+                        game.addCardsToWarBonus(myCard, opponentCard);
+                    }
+                    else
+                    {
 
-                    game.cardBattle(myCard, opponentCard);
+                        Console.WriteLine("Battle: " + myCard + " vs " + opponentCard);
+                        game.cardBattle(myCard, opponentCard);
+                    }
+
+                    /*
+                    Move myMove = null;
+                    if (game.IsWar)
+                    {
+                        myMove = new Move(myCard);
+                    }
+                    else
+                    {
+                       myMove = new Move(myCard);
+                    }
+                    */
 
                     Move myMove = new Move(myCard);
+
+                     
 
                     customFormatter.sendMove(ntwStream, myMove);
 

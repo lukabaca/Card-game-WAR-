@@ -56,11 +56,25 @@ namespace client
                         break;
                     }
 
+
+
                     String opponentCard = opponentMove.Card;
 
                     Console.WriteLine("Battle: " + myCard + " vs " + opponentCard);
 
                     game.cardBattle(myCard, opponentCard);
+
+                    Move myMove = null;
+                    if (game.IsWar)
+                    {
+                        myMove = new Move(myCard, true);
+                    }
+                    else
+                    {
+                        myMove = new Move(myCard);
+                    }
+
+
 
                     game.printWonCardsDeck();
                     Console.WriteLine("Nacisnij cos by wykonac nastepny ruch");

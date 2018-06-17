@@ -9,6 +9,8 @@ namespace gameSpace
     [Serializable]
     public class Move
     {
+        //jesli w ruchu jest wojna to znaczy ze nie walczymy karta z tego ruchu tylko wrzucamy do puli wojny
+
         private String card;
         private Boolean isWar;
         private Boolean isGameFinished;
@@ -26,6 +28,13 @@ namespace gameSpace
 
             this.isWar = isWar;
             this.isGameFinished = isGameFinished;
+        }
+
+        public Move(String card, Boolean isWar)
+        { 
+            this.card = card;
+            this.isWar = isWar;
+            this.isGameFinished = isWar;
         }
 
         public Move(Boolean isGameFinished)

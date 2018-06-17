@@ -4,44 +4,44 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Move
+namespace gameSpace
 {
     [Serializable]
     class War
     {
-        private List<String> serverSideDeck;
-        private List<String> clientSideDeck;
+        private List<String> myCardDeck;
+        private List<String> opponentCardDeck;
 
         
 
         public War()
         {
-            serverSideDeck = new List<String>();
-            clientSideDeck = new List<String>();
+            myCardDeck = new List<String>();
+            opponentCardDeck = new List<String>();
         }
 
         public void clearDecks()
         {
-            serverSideDeck.Clear();
-            clientSideDeck.Clear();
+            myCardDeck.Clear();
+            opponentCardDeck.Clear();
         }
 
         public void addCardsToDecks(String serverSideCard, String clientSideCard)
         {
-            serverSideDeck.Add(serverSideCard);
-            clientSideDeck.Add(clientSideCard);
+            myCardDeck.Add(serverSideCard);
+            opponentCardDeck.Add(clientSideCard);
         }
 
         public List<string> ServerSideDeck
         {
             get
             {
-                return serverSideDeck;
+                return myCardDeck;
             }
 
             set
             {
-                serverSideDeck = value;
+                myCardDeck = value;
             }
         }
 
@@ -49,12 +49,12 @@ namespace Move
         {
             get
             {
-                return clientSideDeck;
+                return opponentCardDeck;
             }
 
             set
             {
-                clientSideDeck = value;
+                opponentCardDeck = value;
             }
         }
     }
