@@ -73,8 +73,8 @@ namespace gameSpace
             int myCardValue = comparingMap[myCardFormatted];
             int opponentCardValue = comparingMap[opponentCardFormatted];
 
-            Console.WriteLine("My card value: " + myCardValue);
-            Console.WriteLine("Opponent card value: " + opponentCardValue);
+            //Console.WriteLine("My card value: " + myCardValue);
+            //Console.WriteLine("Opponent card value: " + opponentCardValue);
 
             if (myCardValue > opponentCardValue)
             {

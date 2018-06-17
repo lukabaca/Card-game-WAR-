@@ -117,6 +117,9 @@ namespace server
 
                 customFormatter.sendMove(ntwStream, myMove);
 
+                game.printWonCardsDeck();
+
+                Console.WriteLine();
             }
 
 

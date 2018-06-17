@@ -53,6 +53,7 @@ namespace client
 
                 game.cardBattle(myCard, opponentCard);
 
+                game.printWonCardsDeck();
                 Console.WriteLine("Nacisnij cos by wykonac nastepny ruch");
                 Console.ReadLine();
             }
