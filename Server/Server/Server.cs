@@ -38,9 +38,15 @@ namespace server
 
             Console.WriteLine("Server is working at port: " + serverPort);
 
-            //testowo poki co
+            initDecks();
+
+            waitForClients();
+        }
+
+        private void initDecks()
+        {
             Deck deck = new Deck();
-            
+
 
             deck.printDeck(Deck.GameDeck);
             deck.shuffleGameDeck();
@@ -48,10 +54,6 @@ namespace server
 
             deck.printDeck(deck.ServerDeck);
             deck.printDeck(deck.ClientDeck);
-
-
-
-            waitForClients();
         }
 
         private void writeToFile(Deck file)
