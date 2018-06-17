@@ -21,29 +21,85 @@ namespace gameSpace
 
         private List<String> clientDeck;
 
+        public Deck()
+        {
+            serverDeck = new List<String>();
+            clientDeck = new List<String>();
+        }
+
         public void shuffleGameDeck()
         {
             var rand = new Random();
 
-            gameDeck = gameDeck.OrderBy(x => rand.Next()).ToList();
+            GameDeck = GameDeck.OrderBy(x => rand.Next()).ToList();
 
             //printDeck();
-
         }
 
         public void initPlayersDecks()
         {
-            
+            for(int i = 0; i < GameDeck.Count; i++)
+            {
+                String card = GameDeck.ElementAt(i);
+                if (i < 13)
+                {
+                    serverDeck.Add(card);
+                }
+                else
+                {
+                    clientDeck.Add(card);
+                }
+            }
         }
 
-        public void printDeck()
+        public void printDeck(List<String> deck)
         {
-            foreach(String card in gameDeck)
+            foreach(String card in deck)
             {
                 Console.WriteLine(card + " ");
             }
             Console.WriteLine("------------------------------");
         }
 
+
+
+        public List<string> ServerDeck
+        {
+            get
+            {
+                return serverDeck;
+            }
+
+            set
+            {
+                serverDeck = value;
+            }
+        }
+
+        public List<string> ClientDeck
+        {
+            get
+            {
+                return clientDeck;
+            }
+
+            set
+            {
+                clientDeck = value;
+            }
+        }
+
+        public static List<string> GameDeck
+        {
+            get
+            {
+                return gameDeck;
+            }
+
+            set
+            {
+                gameDeck = value;
+            }
+        }
     }
 }

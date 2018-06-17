@@ -10,6 +10,7 @@ using System.Text;
 using System.IO;
 
 using gameSpace;
+using System.Collections.Generic;
 
 namespace server
 {
@@ -39,9 +40,14 @@ namespace server
 
             //testowo poki co
             Deck deck = new Deck();
-            deck.printDeck();
+            
+
+            deck.printDeck(Deck.GameDeck);
             deck.shuffleGameDeck();
-            deck.printDeck();
+            deck.initPlayersDecks();
+
+            deck.printDeck(deck.ServerDeck);
+            deck.printDeck(deck.ClientDeck);
 
 
 
