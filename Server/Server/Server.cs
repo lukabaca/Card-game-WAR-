@@ -54,10 +54,15 @@ namespace server
             return deck;
         }
 
-        private void writeToFile(Deck file)
+        public Move receiveMove(NetworkStream ntwStream)
         {
-           
+            Move move = customFormatter.receiveMove(ntwStream);
+            return move;
+        }
 
+        public void sendMove(NetworkStream ntwStream, Move move)
+        {
+            customFormatter.sendMove(ntwStream, move);
         }
 
         private void waitForClients()

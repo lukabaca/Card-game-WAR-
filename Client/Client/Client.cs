@@ -10,12 +10,12 @@ namespace client
     {
         private TcpClient clientSocket;
         private CustomFormatter customFormatter;
-
+        private NetworkStream ntwStream;
         public Client()
         {
             clientSocket = new TcpClient();
             customFormatter = new CustomFormatter();
-            
+            ntwStream = clientSocket.GetStream();
         }
 
         public Boolean connectToServer(String serverIpAddress, int portNumber)
@@ -35,9 +35,20 @@ namespace client
         public Deck receiveDeck()
         {
             
-            NetworkStream ntwStream = clientSocket.GetStream();//to wydziel jako pole klasy client
+            
             Deck deck = customFormatter.receiveDeck(ntwStream);
             return deck;
+        }
+
+        public Move receiveMove()
+        {
+            Move move = customFormatter.receiveMove(ntwStream);
+            return move;
+        }
+
+        public void sendMove(Move move)
+        {
+            customFormatter.sendMove(ntwStream, move);
         }
 
         public TcpClient SocketForServer

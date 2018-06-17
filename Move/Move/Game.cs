@@ -30,6 +30,36 @@ namespace gameSpace
             isPlaying = true;
         }
 
+        public void cardBattle(String myCard, String opponentCard)
+        {
+            int myCardValue = comparingMap[myCard];
+            int opponentCardValue = comparingMap[myCard];
+
+
+            if(myCardValue > opponentCardValue)
+            {
+                //dodaje moja karte, ktora pokonalem przeciwnika i karte przeciwnika do 2 listy, "kupki" kart
+                currentDeck.Remove(myCard);
+
+                wonCardsDeck.Add(myCard);
+                wonCardsDeck.Add(opponentCard);
+            }
+
+            if(myCardValue < opponentCardValue)
+            {
+                //usuwam karte swoja
+                currentDeck.Remove(myCard);
+            }
+
+            if(myCardValue == opponentCardValue)
+            {
+                //przypadek wojny
+            }
+
+
+        }
+
+
         private Boolean isCurrentDeckEmpty()
         {
             if(currentDeck.Count > 0)
