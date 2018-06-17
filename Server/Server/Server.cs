@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace server
 {
-    class Server
+    public class Server
     {
         private int serverPort;
         private IPAddress serverAddr;

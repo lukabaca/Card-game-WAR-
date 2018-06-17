@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 
 namespace client
 {
-    class Client
+    public class Client
     {
         private TcpClient clientSocket;
         private CustomFormatter customFormatter;
