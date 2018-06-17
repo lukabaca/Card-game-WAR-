@@ -46,12 +46,12 @@ namespace server
             Deck deck = new Deck();
 
 
-            deck.printDeck(Deck.GameDeck);
+            //deck.printDeck(Deck.GameDeck);
             deck.shuffleGameDeck();
             deck.initPlayersDecks();
 
-            deck.printDeck(deck.ServerDeck);
-            deck.printDeck(deck.ClientDeck);
+            //deck.printDeck(deck.ServerDeck);
+            //deck.printDeck(deck.ClientDeck);
 
             return deck;
         }
@@ -106,6 +106,8 @@ namespace server
             {
                 if (game.IsPlaying)
                 {
+
+
                     Move opponentMove = customFormatter.receiveMove(ntwStream);
 
                     if(opponentMove.IsGameFinished)
@@ -138,6 +140,7 @@ namespace server
 
                     customFormatter.sendMove(ntwStream, myMove);
 
+                    game.printCurrentDeck();
                     game.printWonCardsDeck();
 
                     Console.WriteLine();

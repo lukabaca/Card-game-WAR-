@@ -44,10 +44,20 @@ namespace client
             Boolean bonus = false;
             while(true)
             {
-                if (game.IsPlaying)
-                {
+               
+                
                     Move move = null;
                     String myCard = game.getCardFromTop();
+
+                    if(!game.IsPlaying)
+                    {
+                        Console.WriteLine("You lost");
+                        Move finalMove = new Move(true);
+
+                        client.sendMove(finalMove);
+                        break;
+                    }
+
                     if (bonus)
                     {
                         move = new Move(myCard, true, false);
@@ -99,19 +109,11 @@ namespace client
 
                     //game.printWonCardsDeck();
                     game.printCurrentDeck();
+                    game.printWonCardsDeck();
                     Console.WriteLine("Nacisnij cos by wykonac nastepny ruch");
                     Console.ReadLine();
-                }
-                else
-                {
-                    //koniec gry
-                    Console.WriteLine("You lost");
-                    Move finalMove = new Move(true);
-
-                    client.sendMove(finalMove);
-
-                    break;
-                }
+                
+                
             }
             
             Console.ReadLine();

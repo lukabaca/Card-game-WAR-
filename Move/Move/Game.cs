@@ -11,9 +11,7 @@ namespace gameSpace
         private static Dictionary<String, int> comparingMap = new Dictionary<string, int>()
         {
          {"2", 2}, { "3",3 }, { "4",4 }, { "5", 5 },
-         { "6", 6 }, { "7", 7 }, { "8",8 }, { "9",9 },
-         { "10",10 }, { "J", 11 }, { "D", 12 }, { "K", 13 },
-         { "A", 14 },
+         { "6", 6 }, { "7", 7 }
          
         };
 
@@ -41,6 +39,7 @@ namespace gameSpace
 
         public String getCardFromTop()
         {
+            /*
             int lastElement = -1;
 
             if (!isCurrentDeckEmpty())
@@ -53,6 +52,33 @@ namespace gameSpace
                 loadDeck(wonCardsDeck);
 
                 lastElement = currentDeck.Count - 1;                
+            }
+            */
+
+            int lastElement = -1;
+
+            if (!isCurrentDeckEmpty())
+            {
+                Console.WriteLine("current lsita nie jest pusta");
+                lastElement = currentDeck.Count - 1;
+            }
+            else
+            {
+                Console.WriteLine("current lsita jest pusta");
+                if (!iswonCardsDeckyEmpty())
+                {
+                    Console.WriteLine("won card deck nie jest pusta");
+                    loadDeck(wonCardsDeck);
+                    Console.WriteLine("CZYSZCZE wonCardsDeck");
+                    resetWonCardsDeckk();
+
+                    lastElement = currentDeck.Count - 1;
+                }
+                //jesli oba decki sa puste to znaczy ze przegralem
+                else
+                {
+                    isPlaying = false;
+                }
             }
 
             return currentDeck.ElementAt(lastElement);
@@ -112,7 +138,7 @@ namespace gameSpace
 
                 if(isWar)
                 {
-                    currentDeck.Remove(myCard);
+                    removeCardFromDeck(myCard);
 
                     war.addCardsToDecks(myCard, opponentCard);
 
@@ -125,7 +151,7 @@ namespace gameSpace
                 }
                 else
                 {
-                    currentDeck.Remove(myCard);
+                    removeCardFromDeck(myCard);
 
                     wonCardsDeck.Add(myCard);
                     wonCardsDeck.Add(opponentCard);
@@ -140,14 +166,14 @@ namespace gameSpace
 
                 if(isWar)
                 {
-                    currentDeck.Remove(myCard);
+                    removeCardFromDeck(myCard);
 
                     war.clearDecks();
                     isWar = false;
                 }
                 else
                 {
-                    currentDeck.Remove(myCard);
+                    removeCardFromDeck(myCard);
                 }
             }
 
@@ -156,7 +182,7 @@ namespace gameSpace
                 Console.WriteLine("JEST WOJNA");
                 isWar = true;
 
-                currentDeck.Remove(myCard);
+                removeCardFromDeck(myCard);
 
                 war.addCardsToDecks(myCard, opponentCard);
                
@@ -207,15 +233,20 @@ namespace gameSpace
         }
         public void removeCardFromDeck(String card)
         {
+            
             if (!isCurrentDeckEmpty())
             {
+                Console.WriteLine("current lsita nie jest pusta");
                 currentDeck.Remove(card);
             }
             else 
             {
+                Console.WriteLine("current lsita jest pusta");
                 if (!iswonCardsDeckyEmpty())
                 {
+                    Console.WriteLine("won card deck nie jest pusta");
                     loadDeck(wonCardsDeck);
+                    Console.WriteLine("CZYSZCZE wonCardsDeck");
                     resetWonCardsDeckk();
                 }
                 //jesli oba decki sa puste to znaczy ze przegralem
