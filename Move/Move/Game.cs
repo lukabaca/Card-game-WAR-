@@ -92,6 +92,7 @@ namespace gameSpace
 
         public void printCurrentDeck()
         {
+            Console.WriteLine("Current deck: ");
             foreach (String card in currentDeck)
             {
                 Console.WriteLine(card + " ");
@@ -101,6 +102,7 @@ namespace gameSpace
 
         public void printWonCardsDeck()
         {
+            Console.WriteLine("Deck with won cards: ");
             foreach (String card in wonCardsDeck)
             {
                 Console.WriteLine(card + " ");

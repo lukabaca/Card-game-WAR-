@@ -82,10 +82,17 @@ namespace server
 
         private void handleClient(TcpClient client)
         {
+            Game game = new Game();
+            
+
+
             Deck deck = initDecks();
             TcpClient newClient = client;
             NetworkStream ntwStream = client.GetStream();
 
+            game.loadDeck(deck.ServerDeck);
+            game.printCurrentDeck();
+            game.printWonCardsDeck();
             customFormatter.sendDeck(ntwStream, deck);
             
 
