@@ -21,6 +21,31 @@ namespace Move
             isPlaying = true;
         }
 
+        private Boolean isCurrentDeckEmpty()
+        {
+            if(currentDeck.Count > 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private Boolean iswonCardsDeckyEmpty()
+        {
+            if (wonCardsDeck.Count > 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+
         //do kupki odkladam karte, ktora wylozylem i pokonala przeciwnika oraz karte przeciwnika
         public void addCardToWonCardsDeck(String myCard, String opponentCard)
         {
@@ -29,7 +54,21 @@ namespace Move
         }
         public void removeCardFromDeck(String card)
         {
-            currentDeck.Remove(card);
+            if (!isCurrentDeckEmpty())
+            {
+                currentDeck.Remove(card);
+            }
+            else if(!iswonCardsDeckyEmpty())
+            {
+
+                loadDeck(wonCardsDeck);
+            }
+            //przypadek gry przegrywanm
+            else
+            {
+                isPlaying = false;
+            }
+
         }
 
         public void loadDeck(List<String> deck)
@@ -40,5 +79,6 @@ namespace Move
                 currentDeck.Add(card);
             }
 
+        }
     }
 }
