@@ -15,7 +15,7 @@ namespace client
         {
             clientSocket = new TcpClient();
             customFormatter = new CustomFormatter();
-            ntwStream = clientSocket.GetStream();
+            
         }
 
         public Boolean connectToServer(String serverIpAddress, int portNumber)
@@ -23,6 +23,7 @@ namespace client
             try
             {
                 clientSocket.Connect(serverIpAddress, portNumber);
+                ntwStream = clientSocket.GetStream();
                 return true;
             }
             catch (Exception e)

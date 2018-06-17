@@ -34,10 +34,19 @@ namespace client
 
             while(true)
             {
+                String myCard = game.getCardFromTop();
+                Move move = new Move(myCard);
 
+                client.sendMove(move);
 
+                Move opponentMove = client.receiveMove();
+                String opponentCard = opponentMove.Card;
 
+                Console.WriteLine("Battle: " + myCard + " vs " + opponentCard);
 
+                game.cardBattle(myCard, opponentCard);
+
+                Console.WriteLine("Nacisnij cos by wykonac nastepny ruch");
                 Console.ReadLine();
             }
 

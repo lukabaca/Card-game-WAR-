@@ -10,10 +10,11 @@ namespace gameSpace
     {
         private static Dictionary<String, int> comparingMap = new Dictionary<string, int>()
         {
-         {"2_PIK", 2}, { "3_PIK",3 }, { "4_PIK",4 }, { "5_PIK", 5 }, { "6_PIK", 6 }, { "7_PIK", 7 }, { "8_PIK",8 }, { "9_PIK",9 }, { "10_PIK",10 }, { "J_PIK", 11 }, { "D_PIK", 12 }, { "K_PIK", 13 }, { "A_PIK", 14 },
-         {"2_KIER", 2}, { "3_KIER",3 }, { "4_KIER",4 }, { "5_KIER", 5 }, { "6_KIER", 6 }, { "7_KIER", 7 }, { "8_KIER",8 }, { "9_KIER",9 }, { "10_KIER",10 }, { "J_KIER", 11 }, { "D_KIER", 12 }, { "K_KIER", 13 }, { "A_KIER", 14 }
-
-
+         {"2", 2}, { "3",3 }, { "4",4 }, { "5", 5 },
+         { "6", 6 }, { "7", 7 }, { "8",8 }, { "9",9 },
+         { "10",10 }, { "J", 11 }, { "D", 12 }, { "K", 13 },
+         { "A", 14 },
+         
         };
 
 
@@ -23,11 +24,22 @@ namespace gameSpace
 
         private Boolean isPlaying;
 
+        private Boolean isWar;
+
+        
+
         public Game()
         {
             currentDeck = new List<String>();
             wonCardsDeck = new List<String>();
             isPlaying = true;
+            isWar = false;
+        }
+
+        public String getCardFromTop()
+        {
+            int lastElement = currentDeck.Count - 1;
+            return currentDeck.ElementAt(lastElement);
         }
 
         public void cardBattle(String myCard, String opponentCard)
@@ -35,10 +47,14 @@ namespace gameSpace
             int myCardValue = comparingMap[myCard];
             int opponentCardValue = comparingMap[myCard];
 
+            Console.WriteLine("My card value: " + myCardValue);
+            Console.WriteLine("Opponent card value: " + opponentCardValue);
 
-            if(myCardValue > opponentCardValue)
+            if (myCardValue > opponentCardValue)
             {
                 //dodaje moja karte, ktora pokonalem przeciwnika i karte przeciwnika do 2 listy, "kupki" kart
+                Console.WriteLine(myCard + " > " + opponentCard);
+
                 currentDeck.Remove(myCard);
 
                 wonCardsDeck.Add(myCard);
@@ -47,12 +63,15 @@ namespace gameSpace
 
             if(myCardValue < opponentCardValue)
             {
+                Console.WriteLine(myCard + " < " + opponentCard);
                 //usuwam karte swoja
                 currentDeck.Remove(myCard);
             }
 
             if(myCardValue == opponentCardValue)
             {
+                isWar = true;
+                Console.WriteLine("JEST WOJNA");
                 //przypadek wojny
             }
 
@@ -138,6 +157,32 @@ namespace gameSpace
                 Console.WriteLine(card + " ");
             }
             Console.WriteLine("@@@@@@@@@@@@@@@@@@@@@@@@@@");
+        }
+
+        public bool IsPlaying
+        {
+            get
+            {
+                return isPlaying;
+            }
+
+            set
+            {
+                isPlaying = value;
+            }
+        }
+
+        public bool IsWar
+        {
+            get
+            {
+                return isWar;
+            }
+
+            set
+            {
+                isWar = value;
+            }
         }
     }
 }

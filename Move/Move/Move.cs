@@ -9,18 +9,18 @@ namespace gameSpace
     [Serializable]
     public class Move
     {
-        private char card;
+        private String card;
         private Boolean isWar;
         private Boolean isGameFinished;
 
-        public Move(char card)
+        public Move(String card)
         {
             this.card = card;
 
             this.isWar = false;
             this.isGameFinished = false;
         }
-        public Move(char card, Boolean isWar, Boolean isGameFinished)
+        public Move(String card, Boolean isWar, Boolean isGameFinished)
         {
             this.card = card;
 
@@ -28,7 +28,7 @@ namespace gameSpace
             this.isGameFinished = isGameFinished;
         }
 
-        public char Card
+        public String Card
         {
             get
             {

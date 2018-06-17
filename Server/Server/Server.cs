@@ -99,21 +99,26 @@ namespace server
             game.printCurrentDeck();
             game.printWonCardsDeck();
             customFormatter.sendDeck(ntwStream, deck);
-            
 
-
-
-            /*
-            //TcpClient newClient = client;
-
-            NetworkStream ntwStream = client.GetStream();
-            FileTransfer file = formatter.deserialize(ntwStream);
-
-            if (file != null)
+            while (true)
             {
-                writeToFile(file);
+                Move opponentMove = customFormatter.receiveMove(ntwStream);
+
+                String myCard = game.getCardFromTop();
+                String opponentCard = opponentMove.Card;
+
+                Console.WriteLine("Battle: " + myCard + " vs " + opponentCard);
+
+                game.cardBattle(myCard, opponentCard);
+
+                Move myMove = new Move(myCard);
+
+                customFormatter.sendMove(ntwStream, myMove);
+
             }
-            */
+
+
+         
         }
 
 
