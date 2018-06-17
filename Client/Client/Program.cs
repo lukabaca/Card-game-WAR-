@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using gameSpace;
 
 namespace client
 {
@@ -17,6 +18,19 @@ namespace client
                 Console.ReadLine();
                 return;
             }
+
+            Game game = new Game();
+
+            Deck deck = client.receiveDeck();
+            if(deck == null)
+            {
+                return;
+            }
+
+            game.loadDeck(deck.ClientDeck);
+
+            game.printCurrentDeck();
+            game.printWonCardsDeck();
 
             while(true)
             {

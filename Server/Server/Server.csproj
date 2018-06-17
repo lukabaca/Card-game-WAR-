@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="fileTransfer">
+      <HintPath>..\..\..\C-client-server\fileTransfer\fileTransfer\bin\Debug\fileTransfer.dll</HintPath>
+    </Reference>
     <Reference Include="Move">
       <HintPath>..\..\Move\Move\bin\Debug\Move.dll</HintPath>
     </Reference>
@@ -46,7 +49,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomFormatter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Server.cs" />

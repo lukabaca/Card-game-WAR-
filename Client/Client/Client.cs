@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.Sockets;
 using System.Runtime.Serialization.Formatters.Binary;
-
+using gameSpace;
 using System.Runtime.Serialization;
 
 namespace client
@@ -9,12 +9,12 @@ namespace client
     class Client
     {
         private TcpClient clientSocket;
-        
+        private CustomFormatter customFormatter;
 
         public Client()
         {
             clientSocket = new TcpClient();
-
+            customFormatter = new CustomFormatter();
             
         }
 
@@ -32,15 +32,12 @@ namespace client
             }
         }
 
-        public void sendFile()
+        public Deck receiveDeck()
         {
-            /*
+            
             NetworkStream ntwStream = clientSocket.GetStream();//to wydziel jako pole klasy client
-            if (formatter.serialize(ntwStream, file))
-            {
-                Console.WriteLine("A file with filename: " + file.FileName + " has been sent");
-            }
-            */
+            Deck deck = customFormatter.receiveDeck(ntwStream);
+            return deck;
         }
 
         public TcpClient SocketForServer

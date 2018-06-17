@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Net;
 using System.Net.Sockets;
-using System.Threading;
-
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Runtime.Serialization;
-
-using System.Text;
-using System.IO;
-
 using gameSpace;
-using System.Collections.Generic;
+using System.Runtime.Serialization;
+using System.Net;
+using System.Threading;
 
 namespace server
 {
@@ -21,9 +15,11 @@ namespace server
 
         private TcpListener serverSocket;
 
-        private CustomFormatter formatter;
+        private CustomFormatter customFormatter;
 
         private Boolean isRunning;
+
+
 
         public Server(String serverAddress, int serverPort)
         {
@@ -34,16 +30,16 @@ namespace server
             this.serverSocket.Start();
 
             this.isRunning = true;
-            this.formatter = new CustomFormatter();
+            this.customFormatter = new CustomFormatter();
 
             Console.WriteLine("Server is working at port: " + serverPort);
 
-            initDecks();
+           
 
             waitForClients();
         }
 
-        private void initDecks()
+        private Deck initDecks()
         {
             Deck deck = new Deck();
 
@@ -54,23 +50,13 @@ namespace server
 
             deck.printDeck(deck.ServerDeck);
             deck.printDeck(deck.ClientDeck);
+
+            return deck;
         }
 
         private void writeToFile(Deck file)
         {
-            /*
-            try
-            {
-                System.IO.File.WriteAllBytes(file.FileName, file.File);
-
-                Console.WriteLine("Utworzono plik o nazwie: " + file.FileName);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Writing to the file was not succesful");
-                Console.WriteLine(e);
-            }
-            */
+           
 
         }
 
@@ -96,6 +82,15 @@ namespace server
 
         private void handleClient(TcpClient client)
         {
+            Deck deck = initDecks();
+            TcpClient newClient = client;
+            NetworkStream ntwStream = client.GetStream();
+
+            customFormatter.sendDeck(ntwStream, deck);
+            
+
+
+
             /*
             //TcpClient newClient = client;
 

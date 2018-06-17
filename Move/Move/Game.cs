@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace gameSpace
 {
-    class Game
+    public class Game
     {
         private static Dictionary<String, int> comparingMap = new Dictionary<string, int>()
         {
@@ -88,6 +88,24 @@ namespace gameSpace
                 currentDeck.Add(card);
             }
 
+        }
+
+        public void printCurrentDeck()
+        {
+            foreach (String card in currentDeck)
+            {
+                Console.WriteLine(card + " ");
+            }
+            Console.WriteLine("###########################");
+        }
+
+        public void printWonCardsDeck()
+        {
+            foreach (String card in wonCardsDeck)
+            {
+                Console.WriteLine(card + " ");
+            }
+            Console.WriteLine("@@@@@@@@@@@@@@@@@@@@@@@@@@");
         }
     }
 }
