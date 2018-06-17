@@ -23,6 +23,8 @@ namespace server
 
         public Server(String serverAddress, int serverPort)
         {
+
+
             this.serverPort = serverPort;
             this.serverAddr = IPAddress.Parse(serverAddress);
 
@@ -67,7 +69,7 @@ namespace server
 
         private void waitForClients()
         {
-
+            
 
             while (isRunning)
             {

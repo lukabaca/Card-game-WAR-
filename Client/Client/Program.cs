@@ -11,6 +11,13 @@ namespace client
     {
         static void Main(string[] args)
         {
+            /*
+            Game test = new Game();
+            String temp = test.changeCardFormat("10_KIER");
+            Console.WriteLine(temp);
+            */
+           
+            
             String localAddress = "127.0.0.1";
             Client client = new Client();
             if (!client.connectToServer(localAddress, 5000))
@@ -49,7 +56,7 @@ namespace client
                 Console.WriteLine("Nacisnij cos by wykonac nastepny ruch");
                 Console.ReadLine();
             }
-
+            
             Console.ReadLine();
         }
     }

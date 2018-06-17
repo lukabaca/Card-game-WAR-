@@ -42,10 +42,36 @@ namespace gameSpace
             return currentDeck.ElementAt(lastElement);
         }
 
+        public String changeCardFormat(String card)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            
+            foreach (char sign in card)
+            {
+                
+                if (sign.Equals('_'))
+                {
+                    break;
+                }
+                else
+                {
+                    
+                    stringBuilder.Append(sign);
+                }
+            }
+
+            String cardFormatted = stringBuilder.ToString();
+            return cardFormatted;
+
+        }
+
         public void cardBattle(String myCard, String opponentCard)
         {
-            int myCardValue = comparingMap[myCard];
-            int opponentCardValue = comparingMap[myCard];
+            String myCardFormatted = changeCardFormat(myCard);
+            String opponentCardFormatted = changeCardFormat(opponentCard);
+
+            int myCardValue = comparingMap[myCardFormatted];
+            int opponentCardValue = comparingMap[opponentCardFormatted];
 
             Console.WriteLine("My card value: " + myCardValue);
             Console.WriteLine("Opponent card value: " + opponentCardValue);
